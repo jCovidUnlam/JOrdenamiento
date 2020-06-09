@@ -16,4 +16,18 @@ public abstract class Ordenamiento <T extends Comparable<T>> {
 		arreglo[j] = temporal;
 	}
 
+	public long getCantIntercambios() {
+		return cantIntercambios;
+	}
+
+	public long getCantComparaciones() {
+		return cantComparaciones;
+	}
+
+	public double getTiempoTranscurrido() {
+		return tiempoTranscurrido;
+	}
+	
+	
+
 }

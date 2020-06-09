@@ -1,5 +1,7 @@
 package graficos;
 
+import java.awt.Color;
+
 public class Barra implements Comparable<Barra>{
 	
 	/*
@@ -10,12 +12,32 @@ public class Barra implements Comparable<Barra>{
 	
 	private double ancho;
 	private double alto;
+	private Color color;
 	
 	
 	public Barra(double ancho, double alto) {
 		super();
 		this.ancho = ancho;
 		this.alto = alto;
+		this.color = Color.YELLOW;
+	}
+	
+	
+	public double getAncho() {
+		return ancho;
+	}
+
+	public double getAlto() {
+		return alto;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 
@@ -25,9 +47,6 @@ public class Barra implements Comparable<Barra>{
 			return -1;
 		if(this.alto > o.alto)
 			return 1;
-		//Esto no deberia pasar!!
-		//Si no es mayor es menor
-		//pero lo dejo por las dudas :)
 		return 0;
 	}
 
