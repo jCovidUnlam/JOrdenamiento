@@ -19,7 +19,7 @@ public class Barra implements Comparable<Barra>{
 		super();
 		this.ancho = ancho;
 		this.alto = alto;
-		this.color = Color.YELLOW;
+		this.color = Color.WHITE;
 	}
 	
 	
@@ -48,6 +48,14 @@ public class Barra implements Comparable<Barra>{
 		if(this.alto > o.alto)
 			return 1;
 		return 0;
+	}
+	
+	public void barraActual() {
+		this.color = Color.PINK;
+	}
+	
+	public void yaOrdenada() {
+		this.color = Color.GRAY;
 	}
 
 	

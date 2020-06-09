@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import src.AlgoritmoOrdenamiento;
+import src.CasoOrdenamiento;
+import src.SetUp;
+
 public class OrdenamientoGrafico extends JFrame{
 	public OrdenamientoGrafico() {
 	}
@@ -27,23 +31,32 @@ public class OrdenamientoGrafico extends JFrame{
 	
 	private ArrayList<Barra> barras; //esto es lo que vamos a ordenar graficamente
 	
+	private boolean is_running = true;
+	
+	private SetUp setUp;
+	
 	public void init() {
 		
 		drawPanel = new DrawPanel();
 		getContentPane().add(drawPanel);
 		
-		barras = new ArrayList<Barra>(10);
+		setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.BURBUJEO);
 		
-		int ancho = (int) (getPreferredSize().getWidth() / 10);
+		barras = new ArrayList<Barra>(setUp.getCantElementos());
 		
-		for (int i = 1; i < 11; i++) {
+		int ancho = (int) (getPreferredSize().getWidth() / setUp.getCantElementos());
+		
+		for (int i = 1; i <= setUp.getCantElementos(); i++) {
 			barras.add(new Barra(ancho, i*10));
 		}
+		
+		barras.get(3).barraActual();
+		barras.get(7).yaOrdenada();
 		
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		//setResizable(false);
 		setTitle("jOrdenamiento");
 		setVisible(true);
 		setFocusable(true);
@@ -67,8 +80,6 @@ public class OrdenamientoGrafico extends JFrame{
 			g2.drawString("Tiempo: " + " X ms", 20, 65);
 			int i = 0;
 			for(Barra b : barras) {
-				if(i == 0)
-					b.setColor(Color.RED);
 				g2.setColor(b.getColor());
 				g2.fillRect(i, (int)(currentDimension.getHeight() - b.getAlto()), (int)b.getAncho(), (int)b.getAlto());
 				i+=b.getAncho();
