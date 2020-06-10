@@ -82,6 +82,8 @@ public class OrdenamientoGrafico extends JFrame{
 			for(Barra b : barras) {
 				g2.setColor(b.getColor());
 				g2.fillRect(i, (int)(currentDimension.getHeight() - b.getAlto()), (int)b.getAncho(), (int)b.getAlto());
+				g2.setColor(Color.BLACK);
+				g2.drawRect(i, (int)(currentDimension.getHeight() - b.getAlto()), (int)b.getAncho(), (int)b.getAlto());
 				i+=b.getAncho();
 			}
 		}
@@ -91,6 +93,14 @@ public class OrdenamientoGrafico extends JFrame{
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(800, 450);
+	}
+	
+	public void update() {
+		//Aca se deberían hacer el intercambio de dos barras... o algo asi
+	}
+	
+	public void display() {
+		drawPanel.repaint();
 	}
 	
 	public static void main(String[] args) throws Exception {
