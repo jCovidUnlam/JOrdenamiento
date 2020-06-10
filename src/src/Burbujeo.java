@@ -1,6 +1,6 @@
 package src;
 
-public class OrdenamientoElemental1 extends Ordenamiento {
+public class Burbujeo extends Ordenamiento {
 
 	@Override
 	public Comparable[] ordenar(Comparable[] arregloInmutable) {
