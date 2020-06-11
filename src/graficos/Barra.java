@@ -13,19 +13,36 @@ public class Barra implements Comparable<Barra>{
 	private double ancho;
 	private double alto;
 	private Color color;
+	private int posFinal;
 	
 	
+	public int getPosFinal() {
+		return posFinal;
+	}
+
+
+	public void setPosFinal(int posFinal) {
+		this.posFinal = posFinal;
+	}
+
+
 	public Barra(double ancho, double alto) {
 		super();
 		this.ancho = ancho;
 		this.alto = alto;
 		this.color = Color.WHITE;
+		//this.posFinal = posFinal;
 	}
 	
 	
 	public double getAncho() {
 		return ancho;
 	}
+
+	public Barra() {
+		super();
+	}
+
 
 	public double getAlto() {
 		return alto;
