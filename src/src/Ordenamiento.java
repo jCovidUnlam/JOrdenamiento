@@ -1,5 +1,8 @@
 package src;
 
+import java.util.List;
+import java.util.Queue;
+
 public abstract class Ordenamiento <T extends Comparable<T>> {
 	
 	protected long cantIntercambios;
@@ -7,6 +10,8 @@ public abstract class Ordenamiento <T extends Comparable<T>> {
 	protected long cantComparaciones;
 	
 	protected double tiempoTranscurrido;
+	
+	protected Queue <Paso> pasos;
 
 	public abstract T[] ordenar(final T[] arregloInmutable);
 

@@ -6,12 +6,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Queue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import src.AlgoritmoOrdenamiento;
 import src.CasoOrdenamiento;
+import src.Paso;
 import src.SetUp;
 
 public class OrdenamientoGrafico extends JFrame{
@@ -35,7 +37,7 @@ public class OrdenamientoGrafico extends JFrame{
 	
 	private SetUp setUp;
 	
-	public void init() {
+	public void init(Queue<Paso> pasos) {
 		
 		drawPanel = new DrawPanel();
 		getContentPane().add(drawPanel);
