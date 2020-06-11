@@ -18,7 +18,7 @@ public class Main {
 		Integer[] arrayEntrada = crearArryAOrdenar(setUp);
 		Integer[] arrayOrdenado = crearArryOrdenado(setUp);
 		
-		arrayEntrada =  ord.ordenar(arrayEntrada);
+		arrayOrdenado =  ord.ordenar(arrayEntrada);
 		
 		graficos.init(ord.getPasos(), arrayEntrada, arrayOrdenado, setUp);
 		

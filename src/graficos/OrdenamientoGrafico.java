@@ -159,7 +159,7 @@ public class OrdenamientoGrafico extends JFrame {
 			if (posFinalBarra2 == posActualBarra2)
 				barras.get(pasoActual.getPosElem2()).setYaOrdenada();
 
-			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.green)
+			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.DARK_GRAY)
 				barras.get(pasoActual.getPosElem1()).setYaOrdenada();
 
 		
@@ -189,22 +189,22 @@ public class OrdenamientoGrafico extends JFrame {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-		OrdenamientoGrafico ord = new OrdenamientoGrafico();
-
-		Integer arrayEntrada[] = { 20, 11, 9, 6, 1, 3, 5, 7, 8, 2, 15, 13, 10 };
-		Integer arrayOrdenado[] = new Integer[arrayEntrada.length];
-
-		Burbujeo<Integer> burbujeo = new Burbujeo<Integer>();
-
-		arrayOrdenado = burbujeo.ordenar(arrayEntrada);
-
-		//ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
-
-		ord.run(arrayOrdenado);
-
-		System.out.println();
-
-	}
+//	public static void main(String[] args) throws Exception {
+//		OrdenamientoGrafico ord = new OrdenamientoGrafico();
+//
+//		Integer arrayEntrada[] = { 20, 11, 9, 6, 1, 3, 5, 7, 8, 2, 15, 13, 10 };
+//		Integer arrayOrdenado[] = new Integer[arrayEntrada.length];
+//
+//		Burbujeo<Integer> burbujeo = new Burbujeo<Integer>();
+//
+//		arrayOrdenado = burbujeo.ordenar(arrayEntrada);
+//
+//		//ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
+//
+//		ord.run(arrayOrdenado);
+//
+//		System.out.println();
+//
+//	}
 
 }
