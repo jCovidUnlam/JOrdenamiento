@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		SetUp setUp = new SetUp(13, 1000, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.BURBUJEO);
+		SetUp setUp = new SetUp(13, 1000, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico();
 		
@@ -35,7 +35,7 @@ public class Main {
 		
 		ArrayList<Integer> arrayEntrada = new ArrayList<Integer>(setUp.getCantElementos());
 		
-		for (int i = 0; i < arrayEntrada.size(); i++) {
+		for (int i = 1; i <= setUp.getCantElementos(); i++) {
 			arrayEntrada.add(i);
 		}
 		
@@ -68,7 +68,7 @@ public class Main {
 		
 		ArrayList<Integer> arrayOrdenado = new ArrayList<Integer>(setUp.getCantElementos());
 		
-		for (int i = 0; i < arrayOrdenado.size(); i++) {
+		for (int i = 1; i <= setUp.getCantElementos(); i++) {
 			arrayOrdenado.add(i);
 		}
 		
