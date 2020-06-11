@@ -5,16 +5,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import src.AlgoritmoOrdenamiento;
 import src.Burbujeo;
-import src.CasoOrdenamiento;
 import src.Paso;
 import src.SetUp;
 import src.TipoPaso;
@@ -22,14 +24,6 @@ import src.TipoPaso;
 public class OrdenamientoGrafico extends JFrame {
 	public OrdenamientoGrafico() {
 	}
-
-	/*
-	 * mi idea sería tener un array de barras en memoria, todas con su ancho y alto
-	 * respectivo. Se construyen todas con igual ancho, y distintas alturas, de
-	 * menor a mayor. dependiendo de como necesitemos el caso (ordenado, invertido,
-	 * etc) , lo podemos dejar asi en orden, darlo vuelta, o ver como desordenarlo
-	 * (eso si que ni idea como hacerlo, je)
-	 */
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,24 +35,33 @@ public class OrdenamientoGrafico extends JFrame {
 
 	private SetUp setUp;
 
-	// OJO: Los valores de SKIP son un resultado de una división entera!
 	private final int SECOND = 1000;
 	private final int FRAMES_PER_SECOND = 60;
 	private final int SKIP_FRAMES = SECOND / FRAMES_PER_SECOND;
 	private final int TICKS_PER_SECOND = 1000;
 	private final int SKIP_TICKS = SECOND / TICKS_PER_SECOND;
 
+	
+	private BufferedImage background;
+	
+	
 	private int loops = 0;
 	private int fps = 0;
 
 	private Queue<Paso> pasos = new LinkedList<Paso>();
 
-	public void init(Queue<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado) {
-
+	public void init(Queue<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado, SetUp setUp) {
+		
+		try {
+			background = ImageIO.read(new File("jcovid.jpeg"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		drawPanel = new DrawPanel();
 		getContentPane().add(drawPanel);
 
-		setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.BURBUJEO);
+		//setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.BURBUJEO);
 
 		barras = new ArrayList<Barra>(setUp.getCantElementos());
 
@@ -101,6 +104,9 @@ public class OrdenamientoGrafico extends JFrame {
 			Dimension currentDimension = getContentPane().getSize();
 			// g2.scale(currentDimension.getWidth() / 800, currentDimension.getHeight() /
 			// 450);
+			
+			g2.drawImage(background, null, 0, 0);
+			
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font("Dialog", Font.BOLD, 15));
 			g2.drawString("Comparaciones: " + 1234, 20, 25);
@@ -127,37 +133,15 @@ public class OrdenamientoGrafico extends JFrame {
 	}
 
 	public void run(Integer[] arrayOrdenado) throws InterruptedException {
-		// System.nanoTime no es seguro entre distintos Threads
-		// En caso de querer utilizarse igual para aumentar la precision en
-		// valores altos de fps o de ticks se debe aumentar también el valor
-		// de las constantes, para que esten en ns y no en ms
-
-		long next_game_tick = System.currentTimeMillis();
-		long next_game_frame = System.currentTimeMillis();
-		long next_frame_calc = System.currentTimeMillis();
-		int frames = 0;
 
 		Paso pasoActual = new Paso();
 
 		pasoActual = pasos.poll();
 
 		while (pasoActual != null) {
-			// if (System.currentTimeMillis() > next_game_tick) {
-			loops++;
-			next_game_tick += SKIP_TICKS;
 			// chekear que si es nulo no haga mas intercambios
 			update(pasoActual);
-			// }
-			// if (System.currentTimeMillis() > next_game_frame) {
-			frames++;
-			next_game_frame += SKIP_FRAMES;
 			display();
-			// }
-			// if (System.currentTimeMillis() > next_frame_calc) {
-			fps = frames;
-			next_frame_calc += SECOND;
-			frames = 0;
-			// }
 
 			java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);
 
@@ -173,10 +157,10 @@ public class OrdenamientoGrafico extends JFrame {
 			int posActualBarra1 = pasoActual.getPosElem1();
 
 			if (posFinalBarra2 == posActualBarra2)
-				barras.get(pasoActual.getPosElem2()).setColor(Color.green);
+				barras.get(pasoActual.getPosElem2()).setYaOrdenada();
 
 			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.green)
-				barras.get(pasoActual.getPosElem1()).setColor(Color.green);
+				barras.get(pasoActual.getPosElem1()).setYaOrdenada();
 
 		
 			pasoActual = pasos.poll();
@@ -186,12 +170,11 @@ public class OrdenamientoGrafico extends JFrame {
 	}
 
 	public void update(Paso paso) {
-		// Aca se deberían hacer el intercambio de dos barras... o algo asi
 		Barra auxBarra = new Barra();
 
-		barras.get(paso.getPosElem1()).barraActual();
+		barras.get(paso.getPosElem1()).setBarraActual();
 
-		barras.get(paso.getPosElem2()).barraActual();
+		barras.get(paso.getPosElem2()).setBarraActual();
 
 		if (paso.getTipo() != TipoPaso.COMPARACION) {
 			auxBarra = barras.get(paso.getPosElem1());
@@ -216,7 +199,7 @@ public class OrdenamientoGrafico extends JFrame {
 
 		arrayOrdenado = burbujeo.ordenar(arrayEntrada);
 
-		ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
+		//ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
 
 		ord.run(arrayOrdenado);
 

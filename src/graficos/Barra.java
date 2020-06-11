@@ -67,12 +67,12 @@ public class Barra implements Comparable<Barra>{
 		return 0;
 	}
 	
-	public void barraActual() {
+	public void setBarraActual() {
 		this.color = Color.PINK;
 	}
 	
-	public void yaOrdenada() {
-		this.color = Color.GRAY;
+	public void setYaOrdenada() {
+		this.color = Color.DARK_GRAY;
 	}
 
 	

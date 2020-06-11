@@ -1,6 +1,4 @@
 package src;
-
-import java.util.List;
 import java.util.Queue;
 
 public abstract class Ordenamiento<T extends Comparable<T>> {
