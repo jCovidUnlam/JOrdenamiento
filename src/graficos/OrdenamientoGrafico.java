@@ -126,7 +126,7 @@ public class OrdenamientoGrafico extends JFrame {
 		return new Dimension(800, 450);
 	}
 
-	public void run() throws InterruptedException {
+	public void run(Integer[] arrayOrdenado) throws InterruptedException {
 		// System.nanoTime no es seguro entre distintos Threads
 		// En caso de querer utilizarse igual para aumentar la precision en
 		// valores altos de fps o de ticks se debe aumentar también el valor
@@ -164,6 +164,21 @@ public class OrdenamientoGrafico extends JFrame {
 			barras.get(pasoActual.getPosElem1()).setColor(Color.white);
 			barras.get(pasoActual.getPosElem2()).setColor(Color.white);
 
+			// pinta la barra que quedo en su lugar final
+			// Esto es horrible, no funciona si hay repetidos, asi que hay que cambiarlo
+			int posFinalBarra2 = barras.get(pasoActual.getPosElem2()).getPosFinal();
+			int posActualBarra2 = pasoActual.getPosElem2();
+
+			int posFinalBarra1 = barras.get(pasoActual.getPosElem1()).getPosFinal();
+			int posActualBarra1 = pasoActual.getPosElem1();
+
+			if (posFinalBarra2 == posActualBarra2)
+				barras.get(pasoActual.getPosElem2()).setColor(Color.green);
+
+			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.green)
+				barras.get(pasoActual.getPosElem1()).setColor(Color.green);
+
+		
 			pasoActual = pasos.poll();
 
 		}
@@ -194,7 +209,7 @@ public class OrdenamientoGrafico extends JFrame {
 	public static void main(String[] args) throws Exception {
 		OrdenamientoGrafico ord = new OrdenamientoGrafico();
 
-		Integer arrayEntrada[] = { 20, 11, 9, 6, 1, 3, 5, 6, 7, 8, 3, 2, 8, 5, 2, 8, 9, 3, 1, 5, 15, 13, 10 };
+		Integer arrayEntrada[] = { 20, 11, 9, 6, 1, 3, 5, 7, 8, 2, 15, 13, 10 };
 		Integer arrayOrdenado[] = new Integer[arrayEntrada.length];
 
 		Burbujeo<Integer> burbujeo = new Burbujeo<Integer>();
@@ -203,7 +218,7 @@ public class OrdenamientoGrafico extends JFrame {
 
 		ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
 
-		ord.run();
+		ord.run(arrayOrdenado);
 
 		System.out.println();
 
