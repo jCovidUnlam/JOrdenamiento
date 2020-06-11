@@ -11,7 +11,7 @@ public class Main {
 		
 		SetUp setUp = new SetUp(13, 1000, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
-		OrdenamientoGrafico graficos = new OrdenamientoGrafico();
+		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
 		Ordenamiento<Integer> ord = setearOrdenamiento(setUp);
 		

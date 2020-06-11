@@ -22,33 +22,19 @@ import src.SetUp;
 import src.TipoPaso;
 
 public class OrdenamientoGrafico extends JFrame {
-	public OrdenamientoGrafico() {
+	
+	public OrdenamientoGrafico(SetUp setUp) {
+		this.setUp = setUp;
 	}
 
 	private static final long serialVersionUID = 1L;
-
 	private DrawPanel drawPanel;
 
 	private ArrayList<Barra> barras; // esto es lo que vamos a ordenar graficamente
-
-	private boolean is_running = true;
+	private Queue<Paso> pasos = new LinkedList<Paso>();
+	private BufferedImage background;
 
 	private SetUp setUp;
-
-	private final int SECOND = 1000;
-	private final int FRAMES_PER_SECOND = 60;
-	private final int SKIP_FRAMES = SECOND / FRAMES_PER_SECOND;
-	private final int TICKS_PER_SECOND = 1000;
-	private final int SKIP_TICKS = SECOND / TICKS_PER_SECOND;
-
-	
-	private BufferedImage background;
-	
-	
-	private int loops = 0;
-	private int fps = 0;
-
-	private Queue<Paso> pasos = new LinkedList<Paso>();
 
 	public void init(Queue<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado, SetUp setUp) {
 		
@@ -60,8 +46,6 @@ public class OrdenamientoGrafico extends JFrame {
 		
 		drawPanel = new DrawPanel();
 		getContentPane().add(drawPanel);
-
-		//setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.BURBUJEO);
 
 		barras = new ArrayList<Barra>(setUp.getCantElementos());
 
@@ -110,7 +94,7 @@ public class OrdenamientoGrafico extends JFrame {
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font("Dialog", Font.BOLD, 15));
 			g2.drawString("Comparaciones: " + 1234, 20, 25);
-			g2.drawString("Intercambios: " + 4321, 20, 45);
+			g2.drawString("Intercambios: " + 1234, 20, 45);
 			g2.drawString("Tiempo: " + " X ms", 20, 65);
 			int i = 0;
 			for (Barra b : barras) {
@@ -134,16 +118,15 @@ public class OrdenamientoGrafico extends JFrame {
 
 	public void run(Integer[] arrayOrdenado) throws InterruptedException {
 
-		Paso pasoActual = new Paso();
-
-		pasoActual = pasos.poll();
+		Paso pasoActual = pasos.poll();
 
 		while (pasoActual != null) {
 			// chekear que si es nulo no haga mas intercambios
 			update(pasoActual);
 			display();
-
-			java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);
+			
+			Thread.sleep(setUp.getTiempoEntreOperaciones());
+			//java.util.concurrent.TimeUnit.MILLISECONDS.sleep(setUp.getTiempoEntreOperaciones());
 
 			barras.get(pasoActual.getPosElem1()).setColor(Color.white);
 			barras.get(pasoActual.getPosElem2()).setColor(Color.white);
