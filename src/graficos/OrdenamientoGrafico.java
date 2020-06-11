@@ -22,30 +22,45 @@ import src.SetUp;
 import src.TipoPaso;
 
 public class OrdenamientoGrafico extends JFrame {
-	
-	public OrdenamientoGrafico(SetUp setUp) {
-		this.setUp = setUp;
+	public OrdenamientoGrafico() {
 	}
 
 	private static final long serialVersionUID = 1L;
+
 	private DrawPanel drawPanel;
 
 	private ArrayList<Barra> barras; // esto es lo que vamos a ordenar graficamente
-	private Queue<Paso> pasos = new LinkedList<Paso>();
-	private BufferedImage background;
+
+	private boolean is_running = true;
 
 	private SetUp setUp;
 
+	private final int SECOND = 1000;
+	private final int FRAMES_PER_SECOND = 60;
+	private final int SKIP_FRAMES = SECOND / FRAMES_PER_SECOND;
+	private final int TICKS_PER_SECOND = 1000;
+	private final int SKIP_TICKS = SECOND / TICKS_PER_SECOND;
+
+	private BufferedImage background;
+
+	private int loops = 0;
+	private int fps = 0;
+
+	private Queue<Paso> pasos = new LinkedList<Paso>();
+
 	public void init(Queue<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado, SetUp setUp) {
-		
+
 		try {
 			background = ImageIO.read(new File("jcovid.jpeg"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		drawPanel = new DrawPanel();
 		getContentPane().add(drawPanel);
+
+		// setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO,
+		// AlgoritmoOrdenamiento.BURBUJEO);
 
 		barras = new ArrayList<Barra>(setUp.getCantElementos());
 
@@ -54,7 +69,7 @@ public class OrdenamientoGrafico extends JFrame {
 		int ancho = (int) (getPreferredSize().getWidth() / setUp.getCantElementos());
 
 		for (int i = 0; i < arrayEntrada.length; i++) {
-			barras.add(new Barra(ancho, arrayEntrada[i] * 10));
+			barras.add(new Barra(ancho, arrayEntrada[i] * 10, arrayEntrada[i]));
 		}
 		for (Barra barra : barras) {
 			double valorBarra = (barra.getAlto() / 10);
@@ -88,13 +103,13 @@ public class OrdenamientoGrafico extends JFrame {
 			Dimension currentDimension = getContentPane().getSize();
 			// g2.scale(currentDimension.getWidth() / 800, currentDimension.getHeight() /
 			// 450);
-			
+
 			g2.drawImage(background, null, 0, 0);
-			
+
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font("Dialog", Font.BOLD, 15));
 			g2.drawString("Comparaciones: " + 1234, 20, 25);
-			g2.drawString("Intercambios: " + 1234, 20, 45);
+			g2.drawString("Intercambios: " + 4321, 20, 45);
 			g2.drawString("Tiempo: " + " X ms", 20, 65);
 			int i = 0;
 			for (Barra b : barras) {
@@ -118,34 +133,43 @@ public class OrdenamientoGrafico extends JFrame {
 
 	public void run(Integer[] arrayOrdenado) throws InterruptedException {
 
-		Paso pasoActual = pasos.poll();
+		Paso pasoActual = new Paso();
+
+		pasoActual = pasos.poll();
 
 		while (pasoActual != null) {
 			// chekear que si es nulo no haga mas intercambios
 			update(pasoActual);
 			display();
-			
-			Thread.sleep(setUp.getTiempoEntreOperaciones());
-			//java.util.concurrent.TimeUnit.MILLISECONDS.sleep(setUp.getTiempoEntreOperaciones());
+
+			java.util.concurrent.TimeUnit.MILLISECONDS.sleep(100);
+
+			// pinta la barra que quedo en su lugar final
+			// Esto es horrible, no funciona si hay repetidos, asi que hay que cambiarlo
+
+//
+//			if (posFinalBarra2 == posActualBarra2)
+//				barras.get(pasoActual.getPosElem2()).setYaOrdenada();
+//
+//			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.DARK_GRAY)
+//				barras.get(pasoActual.getPosElem1()).setYaOrdenada();
 
 			barras.get(pasoActual.getPosElem1()).setColor(Color.white);
 			barras.get(pasoActual.getPosElem2()).setColor(Color.white);
 
-			// pinta la barra que quedo en su lugar final
-			// Esto es horrible, no funciona si hay repetidos, asi que hay que cambiarlo
-			int posFinalBarra2 = barras.get(pasoActual.getPosElem2()).getPosFinal();
-			int posActualBarra2 = pasoActual.getPosElem2();
+			if (barras.get(pasoActual.getPosElem1()).getPosFinal() == pasoActual.getPosElem1()
+					|| barras.get(pasoActual.getPosElem1()).getPosFinal() == pasoActual.getPosElem2()) {
 
-			int posFinalBarra1 = barras.get(pasoActual.getPosElem1()).getPosFinal();
-			int posActualBarra1 = pasoActual.getPosElem1();
+				if (!buscarSiBarraEstaEnPasos(barras.get(pasoActual.getPosElem1()).getValor()))
+					barras.get(pasoActual.getPosElem1()).setYaOrdenada();
+			}
 
-			if (posFinalBarra2 == posActualBarra2)
-				barras.get(pasoActual.getPosElem2()).setYaOrdenada();
+			if (barras.get(pasoActual.getPosElem2()).getPosFinal() == pasoActual.getPosElem2()
+					|| (barras.get(pasoActual.getPosElem2()).getPosFinal() == pasoActual.getPosElem1())) {
+				if (!buscarSiBarraEstaEnPasos(barras.get(pasoActual.getPosElem2()).getValor()))
+					barras.get(pasoActual.getPosElem2()).setYaOrdenada();
+			}
 
-			if (posFinalBarra1 == posActualBarra1 && barras.get(pasoActual.getPosElem2()).getColor() == Color.DARK_GRAY)
-				barras.get(pasoActual.getPosElem1()).setYaOrdenada();
-
-		
 			pasoActual = pasos.poll();
 
 		}
@@ -189,5 +213,24 @@ public class OrdenamientoGrafico extends JFrame {
 //		System.out.println();
 //
 //	}
+
+	private boolean buscarSiBarraEstaEnPasos(Double valorBarra) {
+
+		double valorBarra1EnPasos;
+		double valorBarra2Enpasos;
+		for (Paso paso : pasos) {
+
+			valorBarra1EnPasos = barras.get(paso.getPosElem1()).getValor();
+			valorBarra2Enpasos = barras.get(paso.getPosElem1()).getValor();
+
+			// lo encontro en un paso entonces devuelvo true
+			if ((valorBarra == valorBarra1EnPasos || valorBarra == valorBarra2Enpasos)
+					&& paso.getTipo() != TipoPaso.COMPARACION)
+				return true;
+		}
+
+		return false;
+
+	}
 
 }
