@@ -89,7 +89,7 @@ public class Main {
 			//Descomentar cuando este seleccion :)
 			break;
 		case QUICKSORT:
-			//ord = new QuickSort<Integer>();
+			ord = new QuickSort<Integer>();
 			//Descomentar cuando este Quicksort :)
 			break;
 		default:
