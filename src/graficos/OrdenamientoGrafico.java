@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -40,6 +41,8 @@ public class OrdenamientoGrafico extends JFrame {
 	private long cantIntercambios;
 	
 	private long cantComparaciones;
+	
+	private long tiempoTranscurrido;
 
 	private BufferedImage background;
 
@@ -104,7 +107,7 @@ public class OrdenamientoGrafico extends JFrame {
 			g2.setFont(new Font("Dialog", Font.BOLD, 15));
 			g2.drawString("Comparaciones: " + cantComparaciones, 20, 25);
 			g2.drawString("Intercambios: " + cantIntercambios, 20, 45);
-			g2.drawString("Tiempo: " + " X ms", 20, 65);
+			g2.drawString("Tiempo: " + String.format("%6s", tiempoTranscurrido+ " ms"), 20, 65);
 			int i = 0;
 			for (Barra b : barras) {
 				g2.setColor(b.getColor());
@@ -117,7 +120,6 @@ public class OrdenamientoGrafico extends JFrame {
 
 			}
 		}
-
 	}
 
 	@Override
@@ -135,6 +137,9 @@ public class OrdenamientoGrafico extends JFrame {
 				cantComparaciones++;
 			else
 				cantIntercambios++;
+			
+			tiempoTranscurrido += pasoActual.getTiempoTranscurrido();
+			
 			update(pasoActual);
 			display();
 

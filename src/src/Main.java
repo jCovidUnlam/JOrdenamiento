@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		SetUp setUp = new SetUp(13, 1000, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
+		SetUp setUp = new SetUp(13, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
