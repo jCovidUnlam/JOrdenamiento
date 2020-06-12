@@ -1,11 +1,10 @@
 package src;
-import java.util.Queue;
+import java.util.LinkedList;
+
 
 public abstract class Ordenamiento<T extends Comparable<T>> {
 
-	
-
-	protected Queue<Paso> pasos;
+	protected LinkedList<Paso> pasos;
 
 	public abstract T[] ordenar(final T[] arregloInmutable);
 
@@ -15,11 +14,11 @@ public abstract class Ordenamiento<T extends Comparable<T>> {
 		arreglo[j] = temporal;
 	}
 
-	public Queue<Paso> getPasos() {
+	public LinkedList<Paso> getPasos() {
 		return pasos;
 	}
 
-	public void setPasos(Queue<Paso> pasos) {
+	public void setPasos(LinkedList<Paso> pasos) {
 		this.pasos = pasos;
 	}
 

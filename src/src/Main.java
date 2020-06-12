@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		SetUp setUp = new SetUp(13, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
+		SetUp setUp = new SetUp(30, 50, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
@@ -90,7 +90,6 @@ public class Main {
 			break;
 		case QUICKSORT:
 			ord = new QuickSort<Integer>();
-			//Descomentar cuando este Quicksort :)
 			break;
 		default:
 			break;

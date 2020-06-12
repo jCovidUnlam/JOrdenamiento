@@ -27,8 +27,8 @@ public class Paso {
 	}
 
 
-	public void setTiempoTranscurrido(int tiempoTranscurrido) {
-		this.tiempoTranscurrido = tiempoTranscurrido;
+	public void setTiempoTranscurrido(long l) {
+		this.tiempoTranscurrido = l;
 	}
 
 

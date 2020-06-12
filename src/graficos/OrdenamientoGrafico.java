@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -32,8 +30,6 @@ public class OrdenamientoGrafico extends JFrame {
 
 	private ArrayList<Barra> barras; // esto es lo que vamos a ordenar graficamente
 
-	private boolean is_running = true;
-
 	private SetUp setUp;
 	
 	private Paso pasoActual;
@@ -46,9 +42,9 @@ public class OrdenamientoGrafico extends JFrame {
 
 	private BufferedImage background;
 
-	private Queue<Paso> pasos = new LinkedList<Paso>();
+	private LinkedList<Paso> pasos = new LinkedList<Paso>();
 
-	public void init(Queue<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado, SetUp setUp) {
+	public void init(LinkedList<Paso> pasosParam, Integer[] arrayEntrada, Integer[] arrayOrdenado, SetUp setUp) {
 
 		try {
 			background = ImageIO.read(new File("jcovid.jpeg"));
@@ -66,7 +62,7 @@ public class OrdenamientoGrafico extends JFrame {
 		int ancho = (int) (getPreferredSize().getWidth() / setUp.getCantElementos());
 
 		for (int i = 0; i < arrayEntrada.length; i++) {
-			barras.add(new Barra(ancho, arrayEntrada[i] * 10, arrayEntrada[i]));
+			barras.add(new Barra(ancho, arrayEntrada[i]*10, arrayEntrada[i]));
 		}
 		for (Barra barra : barras) {
 			double valorBarra = (barra.getAlto() / 10);
@@ -82,7 +78,7 @@ public class OrdenamientoGrafico extends JFrame {
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		// setResizable(false);
+		setResizable(false);
 		setTitle("jOrdenamiento");
 		setVisible(true);
 		setFocusable(true);
@@ -124,12 +120,12 @@ public class OrdenamientoGrafico extends JFrame {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(800, 450);
+		return new Dimension(800, 500);
 	}
 
 	public void run(Integer[] arrayOrdenado) throws InterruptedException {
 
-		pasoActual = pasos.poll();
+		pasoActual = pasos.remove(0);
 
 		while (pasoActual != null) {
 			
@@ -168,7 +164,7 @@ public class OrdenamientoGrafico extends JFrame {
 					barras.get(pasoActual.getPosElem2()).setYaOrdenada();
 			}
 
-			pasoActual = pasos.poll();
+			pasoActual = pasos.remove(0);
 
 		}
 
