@@ -108,6 +108,17 @@ public class OrdenamientoGrafico extends JFrame {
 			g2.drawString("Tiempo: " + String.format("%6s", tiempoTranscurrido+ " ns"), 20, 65);
 			g2.drawString("Algoritmo: " + setUp.getAlgoritmo(), 200, 25);
 			g2.drawString("Cant. Elementos: " + setUp.getCantElementos(), 200, 45);
+			g2.fillRect(390, 3, 190, 60);
+			g2.setColor(Color.WHITE);
+			g2.drawString("No ordenado", 400, 25);
+			g2.setColor(Color.PINK);
+			g2.drawString("Comparando", 400, 45);
+			g2.setColor(Color.GRAY);
+			g2.drawString("Ordenado", 500, 25);
+			
+			g2.setColor(Color.CYAN);
+			g2.drawString("Pivot", 500, 45);
+			
 			
 			int i = 0;
 			for (Barra b : barras) {
