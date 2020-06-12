@@ -85,8 +85,7 @@ public class Main {
 			ord = new Burbujeo<Integer>();
 			break;
 		case SELECCION:
-			//ord = new Seleccion<Integer>();
-			//Descomentar cuando este seleccion :)
+			ord = new Seleccion<Integer>();
 			break;
 		case QUICKSORT:
 			ord = new QuickSort<Integer>();
