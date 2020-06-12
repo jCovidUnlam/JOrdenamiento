@@ -22,7 +22,7 @@ public class Archivo {
 
 		if (!file.exists()) {
 			fw = new FileWriter(file);
-			String ColumnNamesList = "algoritmo;condicion;elementos;tiempo en segundos";
+			String ColumnNamesList = "algoritmo;condicion;elementos;tiempo en nanosegundos";
 			builder.append(ColumnNamesList).append("\n");
 		} else
 			fw = new FileWriter(file, true);
@@ -37,4 +37,6 @@ public class Archivo {
 		output.write(builder.toString());
 		output.close();
 	}
+	
+
 }
