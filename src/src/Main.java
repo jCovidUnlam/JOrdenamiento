@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,9 +8,9 @@ import graficos.OrdenamientoGrafico;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		SetUp setUp = new SetUp(13, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
+		SetUp setUp = new SetUp(100, 1, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
@@ -24,6 +25,10 @@ public class Main {
 		
 		try {
 			graficos.run(arrayOrdenado);
+			
+			///en tiempo agregar el tiempo que tardo
+			Archivo.crearCsv(setUp.getAlgoritmo(), setUp.getCasoOrd(), setUp.getCantElementos(), graficos.getTiempoTranscurrido());
+			;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
