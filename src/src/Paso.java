@@ -1,5 +1,7 @@
 package src;
 
+import enums.TipoPaso;
+
 public class Paso {
 	
 	TipoPaso tipo;

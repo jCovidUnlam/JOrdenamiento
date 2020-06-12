@@ -2,10 +2,11 @@ package src;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import enums.AlgoritmoOrdenamiento;
+import enums.CasoOrdenamiento;
 
 //# algoritmo,condicion,elementos,tiempo en segundos
 //burbujeo,casi ordenado,1000,10.3

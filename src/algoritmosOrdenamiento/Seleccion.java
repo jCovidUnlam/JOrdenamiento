@@ -1,7 +1,11 @@
-package src;
+package algoritmosOrdenamiento;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+
+import enums.TipoPaso;
+import src.Ordenamiento;
+import src.Paso;
 
 public class Seleccion<T extends Comparable<T>> extends Ordenamiento<T> {
 

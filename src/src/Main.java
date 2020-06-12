@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import algoritmosOrdenamiento.Burbujeo;
+import algoritmosOrdenamiento.QuickSort;
+import algoritmosOrdenamiento.Seleccion;
+import enums.AlgoritmoOrdenamiento;
+import enums.CasoOrdenamiento;
 import graficos.OrdenamientoGrafico;
 
 public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		SetUp setUp = new SetUp(100, 1, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
+		SetUp setUp = new SetUp(30, 50, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.BURBUJEO);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		

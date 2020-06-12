@@ -1,4 +1,4 @@
-package src;
+package enums;
 
 public enum TipoPaso {
 	

@@ -1,8 +1,12 @@
-package src;
+package algoritmosOrdenamiento;
 
 
 import java.util.Arrays;
 import java.util.LinkedList;
+
+import enums.TipoPaso;
+import src.Ordenamiento;
+import src.Paso;
 
 public class Burbujeo<T extends Comparable<T>> extends Ordenamiento<T> {
 

@@ -1,5 +1,8 @@
 package src;
 
+import enums.AlgoritmoOrdenamiento;
+import enums.CasoOrdenamiento;
+
 public class SetUp {
 	
 	private int cantElementos;

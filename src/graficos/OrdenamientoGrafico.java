@@ -15,9 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import enums.TipoPaso;
 import src.Paso;
 import src.SetUp;
-import src.TipoPaso;
 
 public class OrdenamientoGrafico extends JFrame {
 	public OrdenamientoGrafico(SetUp setUp) {
