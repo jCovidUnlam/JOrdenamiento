@@ -73,6 +73,10 @@ public class Barra implements Comparable<Barra> {
 		this.color = Color.PINK;
 	}
 
+	public void setPivot() {
+		this.color = Color.CYAN;
+	}
+
 	public void setYaOrdenada() {
 		this.color = Color.DARK_GRAY;
 	}

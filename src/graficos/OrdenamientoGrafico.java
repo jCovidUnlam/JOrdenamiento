@@ -176,7 +176,10 @@ public class OrdenamientoGrafico extends JFrame {
 		barras.get(paso.getPosElem1()).setBarraActual();
 
 		barras.get(paso.getPosElem2()).setBarraActual();
-
+		if(paso.isTienePivot()) {
+			barras.get(paso.getPivot()).setPivot();
+		}
+		
 		if (paso.getTipo() != TipoPaso.COMPARACION) {
 			auxBarra = barras.get(paso.getPosElem1());
 			barras.set(paso.getPosElem1(), barras.get(paso.getPosElem2()));
@@ -190,23 +193,9 @@ public class OrdenamientoGrafico extends JFrame {
 
 	}
 
-//	public static void main(String[] args) throws Exception {
-//		OrdenamientoGrafico ord = new OrdenamientoGrafico();
-//
-//		Integer arrayEntrada[] = { 20, 11, 9, 6, 1, 3, 5, 7, 8, 2, 15, 13, 10 };
-//		Integer arrayOrdenado[] = new Integer[arrayEntrada.length];
-//
-//		Burbujeo<Integer> burbujeo = new Burbujeo<Integer>();
-//
-//		arrayOrdenado = burbujeo.ordenar(arrayEntrada);
-//
-//		//ord.init(burbujeo.getPasos(), arrayEntrada, arrayOrdenado);
-//
-//		ord.run(arrayOrdenado);
-//
-//		System.out.println();
-//
-//	}
+	public long getTiempoTranscurrido() {
+		return tiempoTranscurrido;
+	}
 
 	private boolean buscarSiBarraEstaEnPasos(Double valorBarra) {
 

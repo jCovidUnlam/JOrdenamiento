@@ -5,8 +5,9 @@ public class Paso {
 	TipoPaso tipo;
 	private int posElem1;
 	private int posElem2;
-
+	private int pivot;
 	private double tiempoTranscurrido;
+	private boolean tienePivot = false;
 	
 	
 	public Paso(TipoPaso tipo, long tiempoTranscurrido, int posElem1, int posElem2) {
@@ -15,6 +16,33 @@ public class Paso {
 		this.tiempoTranscurrido = tiempoTranscurrido;
 		this.posElem1 = posElem1;
 		this.posElem2 = posElem2;
+	}
+
+	public Paso(TipoPaso tipo, long tiempoTranscurrido, int posElem1, int posElem2, int pivot, boolean tienePivot) {
+		super();
+		this.tipo = tipo;			
+		this.tiempoTranscurrido = tiempoTranscurrido;
+		this.posElem1 = posElem1;
+		this.posElem2 = posElem2;
+		this.pivot = pivot;
+		this.tienePivot = tienePivot;
+	}
+
+	
+	public int getPivot() {
+		return pivot;
+	}
+
+	public boolean isTienePivot() {
+		return tienePivot;
+	}
+
+	public void setTienePivot(boolean tienePivot) {
+		this.tienePivot = tienePivot;
+	}
+
+	public void setPivot(int pivot) {
+		this.pivot = pivot;
 	}
 
 	public Paso() {
