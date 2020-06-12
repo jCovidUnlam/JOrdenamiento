@@ -180,7 +180,10 @@ public class OrdenamientoGrafico extends JFrame {
 		barras.get(paso.getPosElem1()).setBarraActual();
 
 		barras.get(paso.getPosElem2()).setBarraActual();
-
+		if(paso.isTienePivot()) {
+			barras.get(paso.getPivot()).setPivot();
+		}
+		
 		if (paso.getTipo() != TipoPaso.COMPARACION) {
 			auxBarra = barras.get(paso.getPosElem1());
 			barras.set(paso.getPosElem1(), barras.get(paso.getPosElem2()));
