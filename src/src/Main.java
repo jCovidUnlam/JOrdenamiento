@@ -15,7 +15,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		SetUp setUp = new SetUp(30, 100, CasoOrdenamiento.ORDENADO, AlgoritmoOrdenamiento.SELECCION);
+		SetUp setUp = new SetUp(50, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.SELECCION);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
@@ -30,14 +30,11 @@ public class Main {
 		
 		try {
 			graficos.run(arrayOrdenado);
-			
-			///en tiempo agregar el tiempo que tardo
 			Archivo.crearCsv(setUp.getAlgoritmo(), setUp.getCasoOrd(), setUp.getCantElementos(), graficos.getTiempoTranscurrido());
-			;
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	;

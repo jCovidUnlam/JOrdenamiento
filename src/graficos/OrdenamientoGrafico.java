@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -61,12 +60,14 @@ public class OrdenamientoGrafico extends JFrame {
 		pasos = pasosParam;
 
 		int ancho = (int) (getPreferredSize().getWidth() / setUp.getCantElementos());
+		
+		int multiploAltura = setUp.getCantElementos() < 47? 10: 4;
 
 		for (int i = 0; i < arrayEntrada.length; i++) {
-			barras.add(new Barra(ancho, arrayEntrada[i]*10, arrayEntrada[i]));
+			barras.add(new Barra(ancho, arrayEntrada[i] * multiploAltura, arrayEntrada[i]));
 		}
 		for (Barra barra : barras) {
-			double valorBarra = (barra.getAlto() / 10);
+			double valorBarra = (barra.getAlto() / multiploAltura);
 
 			for (int j = 0; j < arrayOrdenado.length; j++) {
 
@@ -79,7 +80,7 @@ public class OrdenamientoGrafico extends JFrame {
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		//setResizable(false);
 		setTitle("jOrdenamiento");
 		setVisible(true);
 		setFocusable(true);
@@ -105,6 +106,9 @@ public class OrdenamientoGrafico extends JFrame {
 			g2.drawString("Comparaciones: " + cantComparaciones, 20, 25);
 			g2.drawString("Intercambios: " + cantIntercambios, 20, 45);
 			g2.drawString("Tiempo: " + String.format("%6s", tiempoTranscurrido+ " ns"), 20, 65);
+			g2.drawString("Algoritmo: " + setUp.getAlgoritmo(), 200, 25);
+			g2.drawString("Cant. Elementos: " + setUp.getCantElementos(), 200, 45);
+			
 			int i = 0;
 			for (Barra b : barras) {
 				g2.setColor(b.getColor());
