@@ -174,6 +174,7 @@ public class OrdenamientoGrafico extends JFrame {
 		barras.get(paso.getPosElem1()).setBarraActual();
 
 		barras.get(paso.getPosElem2()).setBarraActual();
+		
 		if(paso.isTienePivot()) {
 			barras.get(paso.getPivot()).setPivot();
 		}
@@ -202,7 +203,7 @@ public class OrdenamientoGrafico extends JFrame {
 		for (Paso paso : pasos) {
 
 			valorBarra1EnPasos = barras.get(paso.getPosElem1()).getValor();
-			valorBarra2Enpasos = barras.get(paso.getPosElem1()).getValor();
+			valorBarra2Enpasos = barras.get(paso.getPosElem2()).getValor();
 
 			// lo encontro en un paso entonces devuelvo true
 			if ((valorBarra == valorBarra1EnPasos || valorBarra == valorBarra2Enpasos)
