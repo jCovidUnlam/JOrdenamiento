@@ -10,6 +10,7 @@ public class Paso {
 	private int pivot;
 	private double tiempoTranscurrido;
 	private boolean tienePivot = false;
+	private int posibleIntercambio;
 	
 	
 	public Paso(TipoPaso tipo, long tiempoTranscurrido, int posElem1, int posElem2) {
@@ -20,7 +21,7 @@ public class Paso {
 		this.posElem2 = posElem2;
 	}
 
-	public Paso(TipoPaso tipo, long tiempoTranscurrido, int posElem1, int posElem2, int pivot, boolean tienePivot) {
+	public Paso(TipoPaso tipo, long tiempoTranscurrido, int posElem1, int posElem2, int pivot, boolean tienePivot, int posibleIntercambio) {
 		super();
 		this.tipo = tipo;			
 		this.tiempoTranscurrido = tiempoTranscurrido;
@@ -28,9 +29,18 @@ public class Paso {
 		this.posElem2 = posElem2;
 		this.pivot = pivot;
 		this.tienePivot = tienePivot;
+		this.posibleIntercambio = posibleIntercambio;
 	}
 
 	
+	public int getPosibleIntercambio() {
+		return posibleIntercambio;
+	}
+
+	public void setPosibleIntercambio(int posibleIntercambio) {
+		this.posibleIntercambio = posibleIntercambio;
+	}
+
 	public int getPivot() {
 		return pivot;
 	}
