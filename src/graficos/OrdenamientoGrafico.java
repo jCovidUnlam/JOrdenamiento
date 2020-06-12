@@ -188,6 +188,10 @@ public class OrdenamientoGrafico extends JFrame {
 		
 		if(paso.isTienePivot()) {
 			barras.get(paso.getPivot()).setPivot();
+			if(paso.getTipo() == TipoPaso.COMPARACION) {
+				 
+				barras.get(paso.getPosibleIntercambio()).setPosibleIntercambio();
+			}
 		}
 		
 		if (paso.getTipo() != TipoPaso.COMPARACION) {
