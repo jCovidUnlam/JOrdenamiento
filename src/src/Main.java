@@ -15,7 +15,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		SetUp setUp = new SetUp(50, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.QUICKSORT);
+		SetUp setUp = new SetUp(49, 1000, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.QUICKSORT);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
