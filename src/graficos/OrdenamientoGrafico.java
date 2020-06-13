@@ -59,7 +59,7 @@ public class OrdenamientoGrafico extends JFrame {
 
 		pasos = pasosParam;
 
-		int ancho = (int) (getPreferredSize().getWidth() / setUp.getCantElementos());
+		int ancho = (int)(getPreferredSize().getWidth() / setUp.getCantElementos());
 		
 		int multiploAltura = setUp.getCantElementos() < 47? 10: 4;
 
@@ -96,8 +96,6 @@ public class OrdenamientoGrafico extends JFrame {
 			Graphics2D g2 = (Graphics2D) g;
 
 			Dimension currentDimension = getContentPane().getSize();
-			// g2.scale(currentDimension.getWidth() / 800, currentDimension.getHeight() /
-			// 450);
 
 			g2.drawImage(background, null, 0, 0);
 
