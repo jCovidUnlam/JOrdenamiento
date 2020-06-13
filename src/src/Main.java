@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import algoritmosOrdenamiento.Burbujeo;
+import algoritmosOrdenamiento.Insercion;
 import algoritmosOrdenamiento.QuickSort;
 import algoritmosOrdenamiento.Seleccion;
 import enums.AlgoritmoOrdenamiento;
@@ -15,7 +16,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		SetUp setUp = new SetUp(50, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.QUICKSORT);
+		SetUp setUp = new SetUp(50, 100, CasoOrdenamiento.ALEATORIO, AlgoritmoOrdenamiento.INSERCION);
 		
 		OrdenamientoGrafico graficos = new OrdenamientoGrafico(setUp);
 		
@@ -96,8 +97,9 @@ public class Main {
 			break;
 		case QUICKSORT:
 			ord = new QuickSort<Integer>();
-			//Descomentar cuando este Quicksort :)
 			break;
+		case INSERCION:
+			ord = new Insercion<>();
 		default:
 			break;
 		}
